@@ -92,21 +92,21 @@ public interface IBaseDao<T> {
 	 * 查询 分页列表
 	 * @return
 	 */
-	public List<T> find(String hql);
+	public Pager<T> find(String hql);
 	
 	/**
 	 * 占位符的方式查询  分页列表
 	 * @param arg
 	 * @return
 	 */
-	public List<T> find(String hql,Object arg);
+	public Pager<T> find(String hql,Object arg);
 	
 	/**
 	 * 使用占位符的方式查询 分页列表
 	 * @param args
 	 * @return
 	 */
-	public List<T> find(String hql,Object[] args);
+	public Pager<T> find(String hql,Object[] args);
 	
 	
 	/**
@@ -114,7 +114,7 @@ public interface IBaseDao<T> {
 	 * @param alias  hql中 select role from Role where role.user.id in(:ids) and username= :username  用别名的查询方式
 	 * @return
 	 */
-	public List<T> findByAlias(String hql,Map<String,Object> alias);
+	public Pager<T> findByAlias(String hql,Map<String,Object> alias);
 	
 	/**
 	 * 既有别名，也有使用 ？号的方式 查询  分页列表
@@ -123,7 +123,7 @@ public interface IBaseDao<T> {
 	 * @param alias hql中 select role from Role where role.user.id in(:ids) and username= :username  用别名的查询方式
 	 * @return
 	 */
-	public List<T> find(String hql,Object[] args,Map<String,Object> alias);
+	public Pager<T> find(String hql,Object[] args,Map<String,Object> alias);
 	
 	/**************************************************************************
 	 * 分页 列表查询end
@@ -143,6 +143,15 @@ public interface IBaseDao<T> {
 	 */
 	public Object queryObject(String hql,Object[] args);
 	
+	/**
+	 * 通过别名查询对象
+	 */
+	public Object queryObjectByAlias(String hql,Map<String,Object> alias);
+	
+	/**
+	 * 通过别名查询对象
+	 */
+	public Object queryObjectByAlias(String hql,Object[]args,Map<String,Object> alias);
 	
 	/**
 	 * 根据hql更新对象
@@ -162,7 +171,7 @@ public interface IBaseDao<T> {
 	
 	
 	/**************************************************************************
-	 * 根据SQL查询对象，不包含关联对象  begin  list：不分页   find：分页
+	 * 根据SQL查询对象，不包含关联对象  begin  list：不分页   find：分页      listBySql:方法返回值不应该是泛型
 	**************************************************************************/
 	/**
 	 * 如果对项目要求比较高，使用原生SQL代替hql
@@ -180,26 +189,26 @@ public interface IBaseDao<T> {
 	 * @return
 	 */
 	
-	public List<T> listBySql(String sql,Class<T> clz,boolean hasEntity);
+	public List<Object> listBySql(String sql,Class<Object> clz,boolean hasEntity);
 	
-	public List<T> listBySql(String sql,Class<T> clz ,Object arg, boolean hasEntity);
+	public List<Object> listBySql(String sql,Class<Object> clz ,Object arg, boolean hasEntity);
 	
-	public List<T> listBySql(String sql,Class<T> clz, Object[] args, boolean hasEntity);
+	public List<Object> listBySql(String sql,Class<Object> clz, Object[] args, boolean hasEntity);
 	
-	public List<T> listBySql(String sql,Class<T> clz, Map<String,Object> alias, boolean hasEntity);
+	public List<Object> listByAliasSql(String sql,Class<Object> clz, Map<String,Object> alias, boolean hasEntity);
 	
-	public List<T> listBySql(String sql,Class<T> clz, Object[] args,Map<String,Object> alias, boolean hasEntity);
+	public List<Object> listBySql(String sql,Class<Object> clz, Object[] args,Map<String,Object> alias, boolean hasEntity);
 	
 	
-	public Pager<T> findBySql(String sql,Class<T> clz,boolean hasEntity);
+	public Pager<Object> findBySql(String sql,Class<Object> clz,boolean hasEntity);
 	
-	public Pager<T> findBySql(String sql,Class<T> clz ,Object arg, boolean hasEntity);
+	public Pager<Object> findBySql(String sql,Class<Object> clz ,Object arg, boolean hasEntity);
 	
-	public Pager<T> findBySql(String sql,Class<T> clz, Object[] args, boolean hasEntity);
+	public Pager<Object> findBySql(String sql,Class<Object> clz, Object[] args, boolean hasEntity);
 	
-	public Pager<T> findBySql(String sql,Class<T> clz, Map<String,Object> alias, boolean hasEntity);
+	public Pager<Object> findByAliasSql(String sql,Class<Object> clz, Map<String,Object> alias, boolean hasEntity);
 	
-	public Pager<T> findBySql(String sql,Class<T> clz, Object[] args,Map<String,Object> alias, boolean hasEntity);
+	public Pager<Object> findBySql(String sql,Class<Object> clz, Object[] args,Map<String,Object> alias, boolean hasEntity);
 	
 	
 	/**************************************************************************

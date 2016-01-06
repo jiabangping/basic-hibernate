@@ -56,7 +56,7 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
 		</dependency>
-		
+
 		<!-- jsr330 @Inject 代替jsr250的@resource 注入 -->
 		<dependency>
 			<groupId>com.kenai.nbpwr</groupId>
@@ -69,4 +69,13 @@
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 </project>
