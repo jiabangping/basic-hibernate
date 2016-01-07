@@ -5,5 +5,8 @@
 
 junit  Assert如何用
 dbunit easymock 使用
+<<<<<<< HEAD
 
 冲突啊2
+=======
+>>>>>>> branch 'master' of https://github.com/jiabangping/basic-hibernate.git
