@@ -13,6 +13,7 @@ import org.dbunit.DatabaseUnitException;
 import org.dbunit.dataset.DataSetException;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.operation.DatabaseOperation;
+import org.hibernate.LazyInitializationException;
 import org.jbp.basic.dao.IUserDao;
 import org.jbp.basic.model.User;
 import org.jbp.basic.test.util.AbstractDbUnitTestCase;
@@ -23,6 +24,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/beans.xml")
@@ -44,24 +46,19 @@ public class TestUserDao extends AbstractDbUnitTestCase {
 		EntitiesHelper.assertUser(u);
 	}
 	
-	@Test
+	@Test(expected=LazyInitializationException.class)
 	public void testDelete() throws DatabaseUnitException, SQLException {
 		IDataSet ds = createDateSet("t_user");
 		DatabaseOperation.CLEAN_INSERT.execute(dbunitCon, ds);
 		
 		userDao.delete(1);
 		User u = userDao.load(1);
-		//import static org.junit.Assert.*;
-		assertNull(u);
+		//如果这里需要直接使用方法，需要静态导入 import static org.junit.Assert.*;
+		assertNotNull(u);
+		System.out.println(u.getUsername());
 	}
 	
-	@Test
-	public void testAssert() {
-		Object object = null;
-		assertNotNull(object);
-//		assertNotNull(message,object);
-//		Assert.assertn
-	}
+	
 	
 	@After
 	public void tearDown() throws FileNotFoundException, DatabaseUnitException, SQLException {//卸载

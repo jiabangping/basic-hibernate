@@ -5,6 +5,7 @@
 
 junit  Assert如何用
 dbunit easymock 使用
+<<<<<<< HEAD
 
 //为数据库的数据初始化一些东西，测试查询，
 
@@ -20,3 +21,10 @@ Hibernate4 No Session found for current thread原因：http://www.yihaomen.com/a
 could not initialize proxy - no Session: http://my.oschina.net/alexgaoyh/blog/313541
 
 LazyInitializationException
+=======
+<<<<<<< HEAD
+
+冲突啊2
+=======
+>>>>>>> branch 'master' of https://github.com/jiabangping/basic-hibernate.git
+>>>>>>> branch 'master' of https://github.com/jiabangping/basic-hibernate.git
