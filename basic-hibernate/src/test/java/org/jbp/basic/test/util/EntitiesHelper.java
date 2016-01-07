@@ -29,4 +29,5 @@ public class EntitiesHelper {
 	public static void assertUser(User actual) {
 		assertUser(expectedUser, actual);//预期的结果是 1,admin1 与真实的actual对象做比较
 	}
+	
 }

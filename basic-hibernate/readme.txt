@@ -2,10 +2,8 @@
 
 注意在测试类的时候，最好不要加properties文件， 此文件在 clean的时候删不掉
 
-
 junit  Assert如何用
 dbunit easymock 使用
-<<<<<<< HEAD
 
 //为数据库的数据初始化一些东西，测试查询，
 
@@ -18,13 +16,9 @@ Hibernate4 No Session found for current thread原因：http://www.yihaomen.com/a
 参考：http://www.iteye.com/topic/1126047 此文章挺好
 把工作中经常用的东西 融合进去，作为脚手架，方便以后查询 : http://www.iteye.com/topic/1120924
 
-could not initialize proxy - no Session: http://my.oschina.net/alexgaoyh/blog/313541
+could not initialize proxy - no Session: 解决方式： http://my.oschina.net/alexgaoyh/blog/313541(web中，可以在web.xml配置openSessionInView的filter,但是使用junit单元测试时需要别的方法)
+也即spring junit 延迟加载： http://www.360doc.com/content/10/1124/15/4744550_72049294.shtml
 
-LazyInitializationException
-=======
-<<<<<<< HEAD
+泛型 
 
-冲突啊2
-=======
->>>>>>> branch 'master' of https://github.com/jiabangping/basic-hibernate.git
->>>>>>> branch 'master' of https://github.com/jiabangping/basic-hibernate.git
+

@@ -4,6 +4,7 @@
 package org.jbp.basic.dao.impl;
 
 import java.lang.reflect.ParameterizedType;
+import java.math.BigInteger;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -227,11 +228,10 @@ public class BaseDaoImpl<T> implements IBaseDao<T> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Pager<T> find(String hql, Object[] args, Map<String, Object> alias) {
-		hql = initSort(hql);
 		String countSQL = getCountHql(hql,true);
-		countSQL = initSort(countSQL);
+		hql = initSort(hql);
 		Query query = getSession().createQuery(hql);
-		Query countQuery = getSession().createQuery(hql);//查出 totol总记录数
+		Query countQuery = getSession().createQuery(countSQL);//查出 totol总记录数
 		setAliasParameter(query, alias);//设置别名
 		setAliasParameter(countQuery, alias);
 		setParameter(query, args);//设置量化参数
@@ -239,7 +239,7 @@ public class BaseDaoImpl<T> implements IBaseDao<T> {
 		Pager<T> pages = new Pager<T>();
 		setPagers(query,pages);
 		List<T> datas = query.list();
-		long total = (long) countQuery.uniqueResult();
+		long total = (long)countQuery.uniqueResult();
 		pages.setDatas(datas);
 		pages.setTotal(total);
 		return pages;
@@ -313,7 +313,7 @@ public class BaseDaoImpl<T> implements IBaseDao<T> {
 	 * @see org.jbp.basic.basic.dao.IBaseDao#listBySql(java.lang.String, java.lang.Class, boolean)
 	 */
 	@Override
-	public List<Object> listBySql(String sql, Class<Object> clz, boolean hasEntity) {
+	public <N extends Object> List<N> listBySql(String sql, Class<?> clz, boolean hasEntity) {
 		return this.listBySql(sql, clz, null, null, hasEntity);
 	}
 
@@ -321,7 +321,7 @@ public class BaseDaoImpl<T> implements IBaseDao<T> {
 	 * @see org.jbp.basic.basic.dao.IBaseDao#listBySql(java.lang.String, java.lang.Class, java.lang.Object, boolean)
 	 */
 	@Override
-	public List<Object> listBySql(String sql, Class<Object> clz, Object arg,
+	public <N extends Object> List<N> listBySql(String sql, Class<?> clz, Object arg,
 			boolean hasEntity) {
 		return this.listBySql(sql, clz, new Object[]{arg}, null, hasEntity);
 	}
@@ -330,7 +330,7 @@ public class BaseDaoImpl<T> implements IBaseDao<T> {
 	 * @see org.jbp.basic.basic.dao.IBaseDao#listBySql(java.lang.String, java.lang.Class, java.lang.Object[], boolean)
 	 */
 	@Override
-	public List<Object> listBySql(String sql, Class<Object> clz, Object[] args,
+	public <N extends Object> List<N> listBySql(String sql, Class<?> clz, Object[] args,
 			boolean hasEntity) {
 		return this.listBySql(sql, clz, args, null, hasEntity);
 	}
@@ -339,7 +339,7 @@ public class BaseDaoImpl<T> implements IBaseDao<T> {
 	 * @see org.jbp.basic.basic.dao.IBaseDao#listBySql(java.lang.String, java.lang.Class, java.util.Map, boolean)
 	 */
 	@Override
-	public List<Object> listByAliasSql(String sql, Class<Object> clz,
+	public <N extends Object> List<N> listByAliasSql(String sql, Class<?> clz,
 			Map<String, Object> alias, boolean hasEntity) {
 		return this.listBySql(sql, clz, null, alias, hasEntity);
 	}
@@ -349,7 +349,7 @@ public class BaseDaoImpl<T> implements IBaseDao<T> {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Object> listBySql(String sql, Class<Object> clz, Object[] args,
+	public<N extends Object> List<N> listBySql(String sql, Class<?> clz, Object[] args,
 			Map<String, Object> alias, boolean hasEntity) {
 		sql = initSort(sql);
 		SQLQuery sq = getSession().createSQLQuery(sql);
@@ -367,7 +367,7 @@ public class BaseDaoImpl<T> implements IBaseDao<T> {
 	 * @see org.jbp.basic.basic.dao.IBaseDao#findBySql(java.lang.String, java.lang.Class, boolean)
 	 */
 	@Override
-	public Pager<Object> findBySql(String sql, Class<Object> clz, boolean hasEntity) {
+	public <N extends Object> Pager<N> findBySql(String sql, Class<?> clz, boolean hasEntity) {
 		return this.findBySql(sql, clz, null, null, hasEntity);
 	}
 
@@ -375,7 +375,7 @@ public class BaseDaoImpl<T> implements IBaseDao<T> {
 	 * @see org.jbp.basic.basic.dao.IBaseDao#findBySql(java.lang.String, java.lang.Class, java.lang.Object, boolean)
 	 */
 	@Override
-	public Pager<Object> findBySql(String sql, Class<Object> clz, Object arg,
+	public <N extends Object> Pager<N> findBySql(String sql, Class<?> clz, Object arg,
 			boolean hasEntity) {
 		return this.findBySql(sql, clz, new Object[]{arg}, null, hasEntity);
 	}
@@ -384,7 +384,7 @@ public class BaseDaoImpl<T> implements IBaseDao<T> {
 	 * @see org.jbp.basic.basic.dao.IBaseDao#findBySql(java.lang.String, java.lang.Class, java.lang.Object[], boolean)
 	 */
 	@Override
-	public Pager<Object> findBySql(String sql, Class<Object> clz, Object[] args,
+	public <N extends Object> Pager<N> findBySql(String sql, Class<?> clz, Object[] args,
 			boolean hasEntity) {
 		return this.findBySql(sql, clz, args, null, hasEntity);
 	}
@@ -393,7 +393,7 @@ public class BaseDaoImpl<T> implements IBaseDao<T> {
 	 * @see org.jbp.basic.basic.dao.IBaseDao#findBySql(java.lang.String, java.lang.Class, java.util.Map, boolean)
 	 */
 	@Override
-	public Pager<Object> findByAliasSql(String sql, Class<Object> clz,
+	public <N extends Object> Pager<N> findByAliasSql(String sql, Class<?> clz,
 			Map<String, Object> alias, boolean hasEntity) {
 		return this.findBySql(sql, clz, null, alias, hasEntity);
 	}
@@ -403,27 +403,26 @@ public class BaseDaoImpl<T> implements IBaseDao<T> {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public Pager<Object> findBySql(String sql, Class<Object> clz, Object[] args,
+	public <N extends Object> Pager<N> findBySql(String sql, Class<?> clz, Object[] args,
 			Map<String, Object> alias, boolean hasEntity) {
 		String countSQL = getCountHql(sql,false);
-		countSQL = initSort(countSQL);
 		sql = initSort(sql);
-		SQLQuery countQuery = getSession().createSQLQuery(sql);
+		SQLQuery countQuery = getSession().createSQLQuery(countSQL);
 		SQLQuery query = getSession().createSQLQuery(sql);
 		setAliasParameter(query, alias);
 		setAliasParameter(countQuery, alias);
 		setParameter(query, args);
 		setParameter(countQuery, args);
-		Pager<Object> pages = new Pager<Object>();
+		Pager<N> pages = new Pager<N>();
 		setPagers(query, pages);
 		if(hasEntity) {//实体被hibernate管理
 			query.addEntity(clz);
 		}else{
 			query.setResultTransformer(Transformers.aliasToBean(clz));
 		}
-		long total = (long) countQuery.uniqueResult();
-		List<Object> datas = query.list();
-		pages.setTotal(total);
+		BigInteger total = (BigInteger) countQuery.uniqueResult();
+		List<N> datas = query.list();
+		pages.setTotal(total.longValue());
 		pages.setDatas(datas);
 		return pages;
 	}

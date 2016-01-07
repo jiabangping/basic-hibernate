@@ -21,9 +21,12 @@ import org.dbunit.dataset.xml.FlatXmlProducer;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
 
 public class AbstractDbUnitTestCase {
+	protected static final Logger log = LoggerFactory.getLogger(AbstractDbUnitTestCase.class);
 	public static IDatabaseConnection dbunitCon;
 	private File tempFile;
 	
