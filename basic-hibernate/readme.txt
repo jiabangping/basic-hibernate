@@ -14,7 +14,7 @@ dbunit easymock 使用
 Hibernate4 No Session found for current thread原因：http://www.yihaomen.com/article/java/466.htm(这种对于测试 有问题)
 
 参考：http://www.iteye.com/topic/1126047 此文章挺好
-把工作中经常用的东西 融合进去，作为脚手架，方便以后查询 : http://www.iteye.com/topic/1120924
+把工作中经常用的东西 融合进去，作为脚手架，方便以后查询 (zhangkaitao): http://www.iteye.com/topic/1120924
 
 could not initialize proxy - no Session: 解决方式： http://my.oschina.net/alexgaoyh/blog/313541(web中，可以在web.xml配置openSessionInView的filter,但是使用junit单元测试时需要别的方法)
 也即spring junit 延迟加载： http://www.360doc.com/content/10/1124/15/4744550_72049294.shtml
