@@ -117,4 +117,15 @@
 			</plugin>
 		</plugins>
 	</build>
+	<!-- 部署构建至 nexus -->
+	<distributionManagement>
+		<repository>
+			<id>hosted releases</id>
+			<url>http://localhost:8081/nexus/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>hosted snapshots</id>
+			<url>http://localhost:8081/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
 </project>
