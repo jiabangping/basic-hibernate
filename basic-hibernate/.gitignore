@@ -1,6 +1,8 @@
 /target
 /log/
 /.gitignore
+
 /.settings/
 /.project
 /.classpath
+
