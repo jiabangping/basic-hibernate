@@ -21,5 +21,6 @@ could not initialize proxy - no Session: 解决方式： http://my.oschina.net/a
 
 泛型  
 
+不好用
 
 
