@@ -189,6 +189,15 @@ public class BaseDaoImpl<T> implements IBaseDao<T> {
 		setParameter(query, args);
 		return query.list();
 	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public <X extends Object> List<X> listObj(String hql,Object ... args) {
+		hql = initSort(hql);
+		Query query = getSession().createQuery(hql);
+		setParameter(query, args);
+		return query.list();
+	}
 
 	/* (non-Javadoc)
 	 * @see org.jbp.basic.basic.dao.IBaseDao#find(java.lang.String)
