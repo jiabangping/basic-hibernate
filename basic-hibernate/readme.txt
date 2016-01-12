@@ -20,5 +20,6 @@ could not initialize proxy - no Session: 解决方式： http://my.oschina.net/a
 也即spring junit 延迟加载： http://www.360doc.com/content/10/1124/15/4744550_72049294.shtml
 
 泛型 
+再提交点
 
 
