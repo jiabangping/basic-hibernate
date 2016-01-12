@@ -19,7 +19,7 @@ Hibernate4 No Session found for current thread原因：http://www.yihaomen.com/a
 could not initialize proxy - no Session: 解决方式： http://my.oschina.net/alexgaoyh/blog/313541(web中，可以在web.xml配置openSessionInView的filter,但是使用junit单元测试时需要别的方法)
 也即spring junit 延迟加载： http://www.360doc.com/content/10/1124/15/4744550_72049294.shtml
 
-泛型 
+泛型  
 
 
 
